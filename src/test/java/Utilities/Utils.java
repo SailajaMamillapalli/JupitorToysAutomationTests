@@ -34,4 +34,9 @@ public class Utils {
         waitForElement(driver, by);
         return findElement(driver, by).getText();
     }
+
+    public static boolean ElementNotDisplayed(WebDriver driver, By element) {
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+    }
 }

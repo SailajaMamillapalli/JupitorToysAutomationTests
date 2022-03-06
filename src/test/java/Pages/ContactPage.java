@@ -24,6 +24,8 @@ public class ContactPage extends BasePage
     public By ForeNameError = By.id("forename-err");
     public By EmailError = By.id("email-err");
     public By MessageRequiredError = By.id("message-err");
+    public By FormIncompleteError = By.cssSelector("div[class='alert alert-error ng-scope']");
+    public By MainFeedbackMessage = By.cssSelector("div[class='alert alert-info ng-scope']");
 
     public void clickOnSubmitButton()
     {

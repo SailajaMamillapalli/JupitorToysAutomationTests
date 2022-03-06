@@ -1,11 +1,13 @@
 package Tests;
 
 import Pages.HomePage;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import Utilities.Utils;
 import org.testng.annotations.Test;
 
+import static Utilities.Utils.ElementNotDisplayed;
 import static Utilities.Utils.getTextFromElement;
+import static org.testng.Assert.*;
+import static org.testng.Assert.assertTrue;
 
 public class RegressionTests extends BaseTest {
 
@@ -27,11 +29,16 @@ public class RegressionTests extends BaseTest {
         assertEquals(getTextFromElement(driver, contactPage.ForeNameError), "Forename is required");
         assertEquals(getTextFromElement(driver, contactPage.EmailError),"Email is required");
         assertEquals(getTextFromElement(driver, contactPage.MessageRequiredError), "Message is required");
+        assertEquals(getTextFromElement(driver, contactPage.FormIncompleteError), "We welcome your feedback - but we won't get it unless you complete the form correctly.");
 
         contactPage.fillAllMandatoryFields(firstName, email, message);
 
+        //Once all mandatory fields are filled, error messages will disappear and the new message will be displayed
+        assertEquals(getTextFromElement(driver, contactPage.MainFeedbackMessage), "We welcome your feedback - tell it how it is.");
+
         int newCount = contactPage.getErrorListCount();
         assertEquals(newCount, 0, "Total error count must be zero but it is :" + newCount);
+        assertTrue(ElementNotDisplayed(driver, contactPage.FormIncompleteError));
     }
 
     @Test
